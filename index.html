@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Goan Pantry | Authentic Artisanal Masalas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- DESIGN VARIABLES --- */
+        :root {
+            --color-primary: #3E2723;   /* Deep Espresso Brown */
+            --color-accent: #C62828;    /* Rich Spice Red */
+            --color-gold: #D4AF37;      /* Metallic Gold */
+            --color-cream: #F9F6F0;     /* Premium Off-White Background */
+            --color-white: #FFFFFF;
+            --color-text-light: #757575;
+
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+            
+            --shadow-subtle: 0 5px 15px rgba(0,0,0,0.05);
+            --shadow-hover: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-cream);
+            color: var(--color-primary);
+            line-height: 1.7;
+        }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        ul { list-style: none; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
+        .text-gold { color: var(--color-gold); }
+        .text-accent { color: var(--color-accent); }
+
+        /* --- REUSABLE COMPONENTS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 100px 0; }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-white);
+        }
+        .btn-primary:hover { background-color: var(--color-primary); }
+
+        .btn-outline {
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            background: transparent;
+        }
+        .btn-outline:hover { background-color: var(--color-primary); color: var(--color-white); }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .section-header .separator {
+            width: 80px; height: 3px; background-color: var(--color-gold); margin: 0 auto;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: var(--color-white);
+            box-shadow: var(--shadow-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-brand {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu { display: flex; gap: 30px; }
+        .nav-menu a {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            position: relative;
+        }
+        .nav-menu a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px; background: var(--color-accent); transition: 0.3s;
+        }
+        .nav-menu a:hover::after { width: 100%; }
+
+        .nav-icons a { margin-left: 20px; font-size: 1.1rem; }
+        .cart-count { background: var(--color-accent); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; vertical-align: top; margin-left: -5px;}
+
+        /* --- HERO SECTION --- */
+        .hero {
+            /* Using a high-quality stock image of spices for the background */
+            background: linear-gradient(rgba(30, 20, 15, 0.6), rgba(30, 20, 15, 0.6)), 
+                        url('https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white);
+        }
+
+        .hero-logo {
+            width: 180px;
+            margin: 0 auto 30px auto;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.2);
+            padding: 5px;
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero-subtitle { font-size: 1.3rem; margin-bottom: 40px; font-style: italic; opacity: 0.9; font-family: var(--font-heading); }
+
+        /* --- TRUST BAR --- */
+        .trust-bar { background-color: var(--color-primary); color: var(--color-gold); padding: 30px 0; }
+        .trust-grid { display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 20px; }
+        .trust-item i { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+        .trust-item span { text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; font-weight: 700; }
+
+        /* --- SHOP SECTION --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background: var(--color-white);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .product-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-5px); }
+
+        .product-image-wrapper {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            background-color: #f0f0f0;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image-wrapper img { transform: scale(1.05); }
+
+        .badge {
+            position: absolute; top: 15px; left: 15px;
+            background-color: var(--color-gold); color: var(--color-primary);
+            padding: 5px 15px; font-size: 0.7rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; z-index: 2;
+        }
+
+        .product-details { padding: 25px; text-align: center; }
+        .product-title { font-size: 1.4rem; margin-bottom: 10px; }
+        .product-excerpt { color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 15px; }
+        .product-price { display: block; font-size: 1.25rem; font-weight: 700; color: var(--color-accent); margin-bottom: 20px; }
+
+        /* --- FOOTER --- */
+        footer { background-color: #2c1e1a; color: #a8a8a8; padding-top: 80px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px; }
+        .footer-col h4 { color: var(--color-white); margin-bottom: 25px; letter-spacing: 1px; font-size: 0.9rem; text-transform: uppercase; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col ul li a:hover { color: var(--color-gold); }
+        .footer-bottom { background-color: #221714; padding: 25px 0; text-align: center; font-size: 0.8rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .trust-grid { flex-direction: column; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-brand">The Goan Pantry</div>
+                <ul class="nav-menu">
+                    <li><a href="#shop">Shop Masalas</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Recipes</a></li>
+                    <li><a href="#">Wholesale</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="#"><i class="fas fa-search"></i></a>
+                    <a href="#"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="Gemini_Generated_Image_7sw1rd7sw1rd7sw1.png" alt="The Goan Pantry Logo" class="hero-logo">
+            
+            <h1>The True Taste of Home,<br> Hand-Ground.</h1>
+            <p class="hero-subtitle">Small-batch artisanal masalas made from heirloom Goan recipes.</p>
+            <a href="#shop" class="btn btn-primary">Shop The Collection</a>
+        </div>
+    </section>
+
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <i class="fas fa-mortar-pestle"></i>
+                    <span>Stone Ground</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-seedling"></i>
+                    <span>Farm Fresh Ingredients</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-ban"></i>
+                    <span>No Preservatives</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Made in Goa</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="shop" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Signature Blends</h2>
+                <div class="separator"></div>
+                <p style="margin-top: 20px; color: var(--color-text-light);">Authentic flavors crafted for the modern kitchen.</p>
+            </div>
+
+            <div class="product-grid">
+
+                <div class="product-card">
+                    <span class="badge">Bestseller</span>
+                    <div class="product-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1603071627190-c04c0c59a890?q=80&w=2070&auto=format&fit=crop" alt="Classic Vindaloo Paste">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Classic Vindaloo Paste</h3>
+                        <p class="product-excerpt">Tangy, fiery, and rich. The traditional blend for pork or chicken.</p>
+                        <span class="product-price">₹350</span>
+                        <button class="btn btn-outline">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1599924376451-b8efd23522e8?q=80&w=1966&auto=format&fit=crop" alt="Roasted Xacuti Masala">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Roasted Xacuti Masala</h3>
+                        <p class="product-excerpt">A complex 18-spice blend with toasted coconut and star anise.</p>
+                        <span class="product-price">₹290</span>
+                        <button class="btn btn-outline">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <span class="badge" style="background: var(--color-accent); color: white;">New</span>
+                    <div class="product-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1588329891368-b374a55b8496?q=80&w=2070&auto=format&fit=crop" alt="Cafreal Green Spice">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Cafreal Green Spice</h3>
+                        <p class="product-excerpt">Fresh coriander, green chilies, and warm aromatic spices.</p>
+                        <span class="product-price">₹320</span>
+                        <button class="btn btn-outline">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2070&auto=format&fit=crop" alt="Goan Fish Curry Masala">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Goan Fish Curry Mix</h3>
+                        <p class="product-excerpt">The staple daily curry powder. Turmeric, coriander, and mild chili.</p>
+                        <span class="product-price">₹250</span>
+                        <button class="btn btn-outline">Add to Cart</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="nav-brand" style="color: var(--color-white); margin-bottom: 20px;">The Goan Pantry</div>
+                    <p>Preserving the culinary heritage of the Konkan coast, one jar at a time.</p>
+                    <div style="margin-top: 20px; font-size: 1.2rem;">
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">All Masalas</a></li>
+                        <li><a href="#">Gift Boxes</a></li>
+                        <li><a href="#">Wholesale Inquiries</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Journal & Recipes</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p style="margin-bottom: 15px;">Subscribe for spicy recipes and exclusive offers.</p>
+                    <div style="display: flex;">
+                        <input type="email" placeholder="Your email address" style="padding: 10px; border: none; flex-grow: 1;">
+                        <button class="btn btn-primary" style="padding: 10px 20px;">Join</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 The Goan Pantry. All rights reserved. Made with spice in Goa.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
